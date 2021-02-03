@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/model/Education.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/component/EducationTile.dart';
 
 class EducationSection extends StatelessWidget {
-  int _educationCount = 5;
+  final List<Datum> dataEducation;
+
+  EducationSection({@required this.dataEducation});
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +81,15 @@ class EducationSection extends StatelessWidget {
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: _educationCount,
+                itemCount: dataEducation.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.only(
                       top: SpacingDimens.spacing16,
                     ),
-                    child: EducationTile(),
+                    child: EducationTile(
+                      dataEducation: dataEducation[index],
+                    ),
                   );
                 },
               ),

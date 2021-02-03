@@ -1,12 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/config/GlobalEndpoint.dart';
+import 'package:scallingupnutrition/model/Education.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:intl/intl.dart';
 
 class EducationTile extends StatelessWidget {
+  final Datum dataEducation;
+
+  EducationTile({@required this.dataEducation});
+
   @override
   Widget build(BuildContext context) {
+    String formattedDate =
+        DateFormat('dd MMMM yyyy HH:mm').format(dataEducation.createdAt);
+
     return Column(
       children: [
         Row(
@@ -15,7 +25,18 @@ class EducationTile extends StatelessWidget {
             Container(
               width: 100,
               height: 65,
-              color: PaletteColor.primarybg2,
+              decoration: BoxDecoration(
+                color: PaletteColor.primarybg2,
+                borderRadius: BorderRadius.circular(
+                  4.0,
+                ),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    GlobalEndpoint.BASE_STORAGE_URL + dataEducation.photo,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Expanded(
               child: Padding(
@@ -29,7 +50,7 @@ class EducationTile extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'KEHAMILAN',
+                          dataEducation.educationcategory.title.toUpperCase(),
                           style: TypographyStyle.mini.merge(
                             TextStyle(
                               color: PaletteColor.primary,
@@ -41,7 +62,7 @@ class EducationTile extends StatelessWidget {
                           width: SpacingDimens.spacing8,
                         ),
                         Text(
-                          '28 Apr 2020',
+                          formattedDate,
                           style: TypographyStyle.mini.merge(
                             TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -54,19 +75,21 @@ class EducationTile extends StatelessWidget {
                       height: SpacingDimens.spacing4,
                     ),
                     Text(
-                      'Mengenal Lebih Jauh Kehamilan Ektopik atau Kehamilan di Luar Rahim',
+                      dataEducation.title,
                       style: TypographyStyle.subtitle2,
                     ),
                     SizedBox(
                       height: SpacingDimens.spacing4,
                     ),
                     Text(
-                      'Kehamilan adalah sebuah anugerah yang harus dijaga perkembangannya. Tapi, pada beberap ...',
+                      dataEducation.content,
                       style: TypographyStyle.caption1.merge(
                         TextStyle(
                           color: PaletteColor.grey60,
                         ),
                       ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),

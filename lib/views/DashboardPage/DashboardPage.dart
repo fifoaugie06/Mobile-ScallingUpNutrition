@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scallingupnutrition/component/Indicator/IndicatorLoad.dart';
+import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/CarouselSection.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/EducationSection.dart';
@@ -22,7 +25,35 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       body: RefreshIndicator(
         color: PaletteColor.primary,
-        onRefresh: null,
+        onRefresh: () => Provider.of<EducationProvider>(context, listen: false)
+            .getEducation(),
+        child: FutureBuilder(
+          future: Future.wait([
+            Provider.of<EducationProvider>(context, listen: false)
+                .getEducation(),
+          ]),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return indicatorLoad();
+            }
+            return Consumer<EducationProvider>(
+              builder: (context, dataEducation, _) {
+                return SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      CarouselSection(),
+                      FeatureSection(),
+                      EducationSection(
+                        dataEducation: dataEducation.responseEducation.data,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
