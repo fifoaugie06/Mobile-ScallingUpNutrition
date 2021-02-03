@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/LoginPage/LoginPage.dart';
 
 class DialogSuccess extends StatelessWidget {
+  final String content;
+  final BuildContext ctx;
+
+  DialogSuccess({@required this.ctx, @required this.content});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,14 +28,23 @@ class DialogSuccess extends StatelessWidget {
         elevation: 5,
         title: Column(
           children: [
-            Image.asset(
-              'assets/images/check_green.png',
-              width: SpacingDimens.spacing36,
-              height: SpacingDimens.spacing36,
+            Container(
+              padding: EdgeInsets.all(
+                SpacingDimens.spacing12,
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: PaletteColor.green,
+              ),
+              child: Icon(
+                Icons.check,
+                size: 28,
+                color: PaletteColor.primarybg,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: 20,
+                top: SpacingDimens.spacing16,
                 bottom: SpacingDimens.spacing4,
               ),
               child: Text(
@@ -51,7 +67,7 @@ class DialogSuccess extends StatelessWidget {
                 right: SpacingDimens.spacing64,
               ),
               child: Text(
-                'You have successfully added a report',
+                content,
                 textAlign: TextAlign.center,
                 style: TypographyStyle.paragraph.merge(
                   TextStyle(
@@ -69,9 +85,14 @@ class DialogSuccess extends StatelessWidget {
                 color: PaletteColor.primary,
                 onPressed: () {
                   Navigator.pop(context);
+                  Navigator.of(ctx).pushReplacement(
+                    routeTransition(
+                      LoginPage(),
+                    ),
+                  );
                 },
                 child: Text(
-                  'Done',
+                  'OK',
                   style: TypographyStyle.button2.merge(
                     TextStyle(
                       color: PaletteColor.primarybg,

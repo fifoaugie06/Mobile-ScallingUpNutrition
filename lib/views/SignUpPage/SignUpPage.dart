@@ -1,26 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/component/Dialog/DialogFailed.dart';
+import 'package:scallingupnutrition/component/Dialog/DialogSuccess.dart';
 import 'package:scallingupnutrition/component/Indicator/IndicatorLoad.dart';
 import 'package:scallingupnutrition/config/GlobalKeySharedPref.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
+import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/DashboardPage.dart';
-import 'package:scallingupnutrition/views/SignUpPage/SignUpPage.dart';
+import 'package:scallingupnutrition/views/LoginPage/LoginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'component/MainForms.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameFilter = new TextEditingController();
+  final TextEditingController _emailFilter = new TextEditingController();
   final TextEditingController _passwordFilter = new TextEditingController();
+  final TextEditingController _confirmationPasswordFilter =
+      new TextEditingController();
   bool _load = false;
 
   @override
@@ -45,27 +50,23 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.all(SpacingDimens.spacing24),
                   child: Column(
                     children: [
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              "assets/images/sunlogo.png",
-                              height: 100,
-                            ),
-                          ),
-                          SizedBox(
-                            height: SpacingDimens.spacing8,
-                          ),
                           Text(
-                            'SCALLING UP',
-                            style: TypographyStyle.subtitle2,
-                          ),
-                          Text(
-                            'NUTRITION',
-                            style: TypographyStyle.subtitle1.merge(
+                            'SIGN ',
+                            style: TypographyStyle.heading1.merge(
                               TextStyle(
                                 color: PaletteColor.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'UP',
+                            style: TypographyStyle.heading1.merge(
+                              TextStyle(
+                                color: PaletteColor.grey,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -74,7 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       MainForms(
                         usernameFilter: _usernameFilter,
+                        emailFilter: _emailFilter,
                         passwordFilter: _passwordFilter,
+                        confirmationPasswordFilter: _confirmationPasswordFilter,
                       ),
                       Container(
                         padding: EdgeInsets.only(
@@ -84,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               routeTransition(
-                                SignUpPage(),
+                                LoginPage(),
                               ),
                             );
                           },
@@ -92,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
-                                "Don't have an account ? ",
+                                "Already have an account ? ",
                                 style: TypographyStyle.caption2.merge(
                                   TextStyle(
                                     color: PaletteColor.text,
@@ -100,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               Text(
-                                "Sign Up",
+                                "Log In",
                                 style: TypographyStyle.caption2.merge(
                                   TextStyle(
                                     color: PaletteColor.primary,
@@ -128,10 +131,13 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             onPressed: () {
-                              onPressedFunction();
+                              if (_passwordFilter.text ==
+                                  _confirmationPasswordFilter.text) {
+                                onPressedFunction(context);
+                              }
                             },
                             child: Text(
-                              "Login",
+                              "Sign Up",
                               style: TypographyStyle.button1.merge(
                                 TextStyle(
                                   color: PaletteColor.primarybg,
@@ -156,35 +162,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  addPrefToSF(String username, String userid) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(GlobalKeySharedPref.keyPrefIsLogin, true);
-    prefs.setString(GlobalKeySharedPref.keyPrefUsername, username);
-    prefs.setString(GlobalKeySharedPref.keyPrefUserId, userid);
-  }
-
-  void onPressedFunction() {
+  void onPressedFunction(BuildContext ctx) {
     setState(() {
       _load = true;
     });
 
-    final authState = Provider.of<LoginProvider>(context, listen: false);
+    final registerState = Provider.of<RegisterProvider>(context, listen: false);
 
-    authState.auth(_usernameFilter.text, _passwordFilter.text).then((value) {
+    registerState
+        .register(_usernameFilter.text, _emailFilter.text, _passwordFilter.text)
+        .then((value) {
       if (value == 200) {
-        addPrefToSF(
-            _usernameFilter.text, authState.responseLogin.data.id.toString());
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => DashboardPage(),
-          ),
+        showDialog(
+          context: context,
+          builder: (context) {
+            return DialogSuccess(
+              ctx: ctx,
+              content: registerState.responseRegister.message,
+            );
+          },
         );
       } else if (value == 400) {
         showDialog(
           context: context,
           builder: (context) {
             return DialogFailed(
-              content: "Username or Password is Wrong",
+              content: registerState.responseRegister.message,
             );
           },
         );

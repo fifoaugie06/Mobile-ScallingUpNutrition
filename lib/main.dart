@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
+import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/views/SplashScreenPage/SplashScreenPage.dart';
 
 void main() {
@@ -19,6 +20,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => LoginProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RegisterProvider(),
         ),
       ],
       child: MaterialApp(
