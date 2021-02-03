@@ -19,6 +19,7 @@ class PaletteColor {
   static const Color grey80 = Color(0xFF5D5D5D);
   static const Color grey60 = Color(0xFFA0A0A0);
   static const Color grey40 = Color(0xFFE4E4E4);
+  static const Color grey20 = Color(0xFFF1F1F1);
 
   /* Semantic Color */
   static const Color red = Color(0xFFFF3B30);

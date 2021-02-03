@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/theme/PaletteColor.dart';
+import 'package:scallingupnutrition/views/DashboardPage/section/CarouselSection.dart';
+import 'package:scallingupnutrition/views/DashboardPage/section/EducationSection.dart';
+import 'package:scallingupnutrition/views/DashboardPage/section/FeatureSection.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -9,10 +13,16 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'ASD',
+      backgroundColor: PaletteColor.primarybg,
+      appBar: AppBar(
+        title: Text(
+          'SCALLING UP NUTRITION',
         ),
+        backgroundColor: PaletteColor.primary,
+      ),
+      body: RefreshIndicator(
+        color: PaletteColor.primary,
+        onRefresh: null,
       ),
     );
   }
