@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/component/Animation/ScaleTileTransition.dart';
+import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/HPHTPage/HPHTPage.dart';
 
 class FeatureSection extends StatelessWidget {
   @override
@@ -17,7 +19,17 @@ class FeatureSection extends StatelessWidget {
             ),
             child: Row(
               children: [
-                featureTile(title: "HPHT", icon: Icons.room, onTap: () {}),
+                featureTile(
+                  title: "HPHT",
+                  icon: Icons.room,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      routeTransition(
+                        HPHTPage(),
+                      ),
+                    );
+                  },
+                ),
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),

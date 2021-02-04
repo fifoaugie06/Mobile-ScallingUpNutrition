@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/model/Education.dart';
+import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/component/EducationTile.dart';
+import 'package:scallingupnutrition/views/EducationPage/EducationDetailPage.dart';
 
 class EducationSection extends StatelessWidget {
   final List<Datum> dataEducation;
@@ -83,12 +85,24 @@ class EducationSection extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: dataEducation.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(
-                      top: SpacingDimens.spacing16,
-                    ),
-                    child: EducationTile(
-                      dataEducation: dataEducation[index],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        routeTransition(
+                          EducationDetailPage(
+                            dataEducation: dataEducation[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: SpacingDimens.spacing16,
+                      ),
+                      color: PaletteColor.primarybg,
+                      child: EducationTile(
+                        dataEducation: dataEducation[index],
+                      ),
                     ),
                   );
                 },

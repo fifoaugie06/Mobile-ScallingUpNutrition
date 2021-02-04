@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/component/Indicator/IndicatorLoad.dart';
 import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
+import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/CarouselSection.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/EducationSection.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/FeatureSection.dart';
@@ -20,6 +23,12 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         title: Text(
           'SCALLING UP NUTRITION',
+          style: TypographyStyle.subtitle1.merge(
+            TextStyle(
+              color: PaletteColor.primarybg,
+              fontWeight: FontWeight.w700
+            ),
+          ),
         ),
         backgroundColor: PaletteColor.primary,
       ),

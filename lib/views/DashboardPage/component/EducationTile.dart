@@ -65,8 +65,9 @@ class EducationTile extends StatelessWidget {
                           formattedDate,
                           style: TypographyStyle.mini.merge(
                             TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: PaletteColor.grey80),
+                              fontWeight: FontWeight.w600,
+                              color: PaletteColor.grey80,
+                            ),
                           ),
                         ),
                       ],
