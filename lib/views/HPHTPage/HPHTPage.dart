@@ -5,6 +5,7 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:intl/intl.dart';
 
 class HPHTPage extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class HPHTPage extends StatefulWidget {
 class _HPHTPageState extends State<HPHTPage> {
   DateTime _currentDate = DateTime.now();
   DateTime _currentDate2 = DateTime.now();
+  String result;
 
   CalendarCarousel _calendarCarouselNoHeader;
 
@@ -33,7 +35,7 @@ class _HPHTPageState extends State<HPHTPage> {
             // color: PaletteColor.primary,
             fontWeight: FontWeight.w700),
       ),
-      height: 420.0,
+      height: 380.0,
       selectedDateTime: _currentDate2,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       showHeader: true,
@@ -92,6 +94,26 @@ class _HPHTPageState extends State<HPHTPage> {
                 ),
               ),
               _calendarCarouselNoHeader,
+              result != null ? Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Result :',
+                    style: TypographyStyle.subtitle2,
+                  ),
+                  SizedBox(
+                    height: SpacingDimens.spacing8,
+                  ),
+                  Text(
+                    'Simkecil diperkirakan lahir pada tanggal ' + result,
+                    style: TypographyStyle.subtitle2,
+                  ),
+                ],
+              ) : Container(),
+              SizedBox(
+                height: SpacingDimens.spacing48,
+              ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: FlatButton(
@@ -105,7 +127,11 @@ class _HPHTPageState extends State<HPHTPage> {
                     ),
                   ),
                   onPressed: () {
-                    print(calculateHpht(_currentDate2));
+                    setState(() {
+                      result = DateFormat('dd MMMM yyyy').format(
+                        calculateHpht(_currentDate2),
+                      );
+                    });
                   },
                   child: Text(
                     "Kalkulasikan",
@@ -127,10 +153,12 @@ class _HPHTPageState extends State<HPHTPage> {
   DateTime calculateHpht(DateTime currentDate) {
     var result;
 
-    if(currentDate.month >= 1 && currentDate.month <= 3){
-      result = new DateTime(currentDate.year, currentDate.month + 9, currentDate.day + 7);
-    }else{
-      result = new DateTime(currentDate.year + 1, currentDate.month - 3, currentDate.day + 7);
+    if (currentDate.month >= 1 && currentDate.month <= 3) {
+      result = new DateTime(
+          currentDate.year, currentDate.month + 9, currentDate.day + 7);
+    } else {
+      result = new DateTime(
+          currentDate.year + 1, currentDate.month - 3, currentDate.day + 7);
     }
 
     return result;
