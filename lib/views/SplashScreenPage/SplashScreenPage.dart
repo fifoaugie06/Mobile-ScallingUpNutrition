@@ -34,7 +34,11 @@ class _SplashScreenState extends State<SplashScreenPage> {
     if (isHasLogined) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => DashboardPage(),
+          builder: (context) => DashboardPage(
+            idUser: int.parse(
+              userid,
+            ),
+          ),
         ),
       );
     } else {

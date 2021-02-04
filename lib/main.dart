@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
 import 'package:scallingupnutrition/providers/RegisterProvider.dart';
+import 'package:scallingupnutrition/providers/UserProvider.dart';
 import 'package:scallingupnutrition/views/SplashScreenPage/SplashScreenPage.dart';
 
 void main() {
@@ -27,6 +28,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => EducationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
         ),
       ],
       child: MaterialApp(

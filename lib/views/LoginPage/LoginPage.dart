@@ -176,7 +176,9 @@ class _LoginPageState extends State<LoginPage> {
             _usernameFilter.text, authState.responseLogin.data.id.toString());
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => DashboardPage(),
+            builder: (context) => DashboardPage(
+              idUser: authState.responseLogin.data.id,
+            ),
           ),
         );
       } else if (value == 400) {
