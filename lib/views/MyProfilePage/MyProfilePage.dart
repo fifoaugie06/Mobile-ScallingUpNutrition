@@ -5,6 +5,7 @@ import 'package:scallingupnutrition/providers/UserProvider.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/MyProfilePage/component/DialogEditProfile.dart';
 
 class MyProfilePage extends StatelessWidget {
   final int idUser;
@@ -31,7 +32,15 @@ class MyProfilePage extends StatelessWidget {
               size: 20,
             ),
             onPressed: () {
-              // do something
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return DialogEditProfile(
+                    idUser: idUser,
+                    ctx: context,
+                  );
+                },
+              );
             },
           )
         ],
@@ -80,18 +89,18 @@ class MyProfilePage extends StatelessWidget {
                           children: [
                             contentProfile(
                               "Tinggi Badan",
-                              user.tbBb == null
+                              user.tb == null
                                   ? "-"
-                                  : user.tbBb.toString().split("-")[0] + " Cm",
+                                  : user.tb.toString() + " Cm",
                             ),
                             SizedBox(
                               width: SpacingDimens.spacing32,
                             ),
                             contentProfile(
                               "Berat Badan",
-                              user.tbBb == null
+                              user.bb == null
                                   ? "-"
-                                  : user.tbBb.toString().split("-")[1] + " Kg",
+                                  : user.bb.toString() + " Kg",
                             ),
                           ],
                         ),
@@ -99,9 +108,7 @@ class MyProfilePage extends StatelessWidget {
                           "Tempat Tanggal Lahir",
                           user.ttl == null
                               ? "-"
-                              : user.ttl.toString().split("-")[0] +
-                                  " " +
-                                  user.ttl.toString().split("-")[1],
+                              : user.ttl.toString(),
                         ),
                         contentProfile(
                           "Alamat Email",

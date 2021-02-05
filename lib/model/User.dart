@@ -37,7 +37,8 @@ class Data {
     this.id,
     this.username,
     this.fullname,
-    this.tbBb,
+    this.tb,
+    this.bb,
     this.ttl,
     this.address,
     this.email,
@@ -50,8 +51,9 @@ class Data {
   int id;
   String username;
   String fullname;
-  dynamic tbBb;
-  dynamic ttl;
+  dynamic tb;
+  dynamic bb;
+  String ttl;
   dynamic address;
   String email;
   DateTime verifiedAt;
@@ -63,7 +65,8 @@ class Data {
         id: json["id"],
         username: json["username"],
         fullname: json["fullname"],
-        tbBb: json["tb_bb"],
+        tb: json["tb"],
+        bb: json["bb"],
         ttl: json["ttl"],
         address: json["address"],
         email: json["email"],
@@ -77,7 +80,8 @@ class Data {
         "id": id,
         "username": username,
         "fullname": fullname,
-        "tb_bb": tbBb,
+        "tb": tb,
+        "bb": bb,
         "ttl": ttl,
         "address": address,
         "email": email,
