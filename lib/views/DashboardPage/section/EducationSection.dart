@@ -6,6 +6,7 @@ import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/component/EducationTile.dart';
 import 'package:scallingupnutrition/views/EducationPage/EducationDetailPage.dart';
+import 'package:scallingupnutrition/views/EducationPage/EducationPage.dart';
 
 class EducationSection extends StatelessWidget {
   final List<Datum> dataEducation;
@@ -54,7 +55,11 @@ class EducationSection extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      routeTransition(EducationPage()),
+                    );
+                  },
                   child: Row(
                     children: [
                       Text(
@@ -90,7 +95,11 @@ class EducationSection extends StatelessWidget {
                       Navigator.of(context).push(
                         routeTransition(
                           EducationDetailPage(
-                            dataEducation: dataEducation[index],
+                            title: dataEducation[index].title,
+                            category: dataEducation[index].educationcategory.title,
+                            photo: dataEducation[index].photo,
+                            content: dataEducation[index].content,
+                            createdAt: dataEducation[index].createdAt,
                           ),
                         ),
                       );
@@ -101,7 +110,11 @@ class EducationSection extends StatelessWidget {
                       ),
                       color: PaletteColor.primarybg,
                       child: EducationTile(
-                        dataEducation: dataEducation[index],
+                        title: dataEducation[index].title,
+                        category: dataEducation[index].educationcategory.title,
+                        photo: dataEducation[index].photo,
+                        content: dataEducation[index].content,
+                        createdAt: dataEducation[index].createdAt,
                       ),
                     ),
                   );

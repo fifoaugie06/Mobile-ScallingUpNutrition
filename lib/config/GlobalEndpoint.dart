@@ -8,6 +8,7 @@ class GlobalEndpoint {
   static const REGISTER_URL = BASE_API_URL + 'users/register';
 
   static const EDUCATION_URL = BASE_API_URL + 'education';
+  static const EDUCATION_CATEGORY_URL = BASE_API_URL + 'education-category';
   static const USER_URL = BASE_API_URL + 'users/detail/';
   static const USERS_URL = BASE_API_URL + 'users';
 }

@@ -1,21 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/config/GlobalEndpoint.dart';
-import 'package:scallingupnutrition/model/Education.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:intl/intl.dart';
 
 class EducationTile extends StatelessWidget {
-  final Datum dataEducation;
+  final String title, category, content, photo;
+  final DateTime createdAt;
 
-  EducationTile({@required this.dataEducation});
+  EducationTile({
+    @required this.title,
+    @required this.category,
+    @required this.content,
+    @required this.photo,
+    @required this.createdAt,
+  });
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate =
-        DateFormat('dd MMMM yyyy HH:mm').format(dataEducation.createdAt);
+    String formattedDate = DateFormat('dd MMMM yyyy HH:mm').format(createdAt);
 
     return Column(
       children: [
@@ -32,7 +37,7 @@ class EducationTile extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   image: NetworkImage(
-                    GlobalEndpoint.BASE_STORAGE_URL + dataEducation.photo,
+                    GlobalEndpoint.BASE_STORAGE_URL + photo,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -50,7 +55,7 @@ class EducationTile extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          dataEducation.educationcategory.title.toUpperCase(),
+                          category.toUpperCase(),
                           style: TypographyStyle.mini.merge(
                             TextStyle(
                               color: PaletteColor.primary,
@@ -76,14 +81,14 @@ class EducationTile extends StatelessWidget {
                       height: SpacingDimens.spacing4,
                     ),
                     Text(
-                      dataEducation.title,
+                      title,
                       style: TypographyStyle.subtitle2,
                     ),
                     SizedBox(
                       height: SpacingDimens.spacing4,
                     ),
                     Text(
-                      dataEducation.content,
+                      content,
                       style: TypographyStyle.caption1.merge(
                         TextStyle(
                           color: PaletteColor.grey60,

@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/config/GlobalEndpoint.dart';
-import 'package:scallingupnutrition/model/Education.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:intl/intl.dart';
 
 class EducationDetailPage extends StatelessWidget {
-  final Datum dataEducation;
+  final String title, category, content, photo;
+  final DateTime createdAt;
 
-  EducationDetailPage({@required this.dataEducation});
+  EducationDetailPage({
+    @required this.title,
+    @required this.category,
+    @required this.content,
+    @required this.photo,
+    @required this.createdAt,
+  });
 
   @override
   Widget build(BuildContext context) {
     String formattedDate =
-        DateFormat('dd MMMM yyyy HH:mm').format(dataEducation.createdAt);
+        DateFormat('dd MMMM yyyy HH:mm').format(createdAt);
 
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +56,7 @@ class EducationDetailPage extends StatelessWidget {
                   top: SpacingDimens.spacing16,
                 ),
                 child: Text(
-                  dataEducation.title,
+                  title,
                   style: TypographyStyle.subtitle2,
                 ),
               ),
@@ -60,7 +66,7 @@ class EducationDetailPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    dataEducation.educationcategory.title,
+                    category,
                     style: TypographyStyle.mini.merge(
                       TextStyle(
                         color: PaletteColor.primary,
@@ -95,7 +101,7 @@ class EducationDetailPage extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     image: NetworkImage(
-                      GlobalEndpoint.BASE_STORAGE_URL + dataEducation.photo,
+                      GlobalEndpoint.BASE_STORAGE_URL + photo,
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -105,7 +111,7 @@ class EducationDetailPage extends StatelessWidget {
                 height: SpacingDimens.spacing16,
               ),
               Text(
-                dataEducation.content,
+                content,
                 style: TypographyStyle.paragraph.merge(
                   TextStyle(
                     height: 1.5,
