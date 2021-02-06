@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scallingupnutrition/providers/ChildrenProvider.dart';
 import 'package:scallingupnutrition/providers/EducationCategoryProvider.dart';
 import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
 import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/providers/UserProvider.dart';
+import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
 import 'package:scallingupnutrition/views/SplashScreenPage/SplashScreenPage.dart';
 
 void main() {
@@ -35,6 +37,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ChildrenProvider(),
         ),
       ],
       child: MaterialApp(

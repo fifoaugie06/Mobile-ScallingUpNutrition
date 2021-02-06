@@ -4,9 +4,14 @@ import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
 import 'package:scallingupnutrition/views/HPHTPage/HPHTPage.dart';
 
 class FeatureSection extends StatelessWidget {
+  final int idUser;
+
+  FeatureSection({@required this.idUser});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +42,19 @@ class FeatureSection extends StatelessWidget {
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),
-                featureTile(title: "Bio Anak", icon: Icons.room, onTap: () {}),
+                featureTile(
+                  title: "Bio Anak",
+                  icon: Icons.room,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      routeTransition(
+                        BioAnakPage(
+                          idUser: idUser,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

@@ -11,4 +11,5 @@ class GlobalEndpoint {
   static const EDUCATION_CATEGORY_URL = BASE_API_URL + 'education-category';
   static const USER_URL = BASE_API_URL + 'users/detail/';
   static const USERS_URL = BASE_API_URL + 'users';
+  static const CHILDREN_URL = BASE_API_URL + 'children';
 }

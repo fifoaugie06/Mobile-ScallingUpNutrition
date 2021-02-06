@@ -73,7 +73,9 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Column(
                     children: [
                       CarouselSection(),
-                      FeatureSection(),
+                      FeatureSection(
+                        idUser: widget.idUser,
+                      ),
                       EducationSection(
                         dataEducation: dataEducation.responseEducation.data,
                       ),
