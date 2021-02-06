@@ -19,7 +19,6 @@ class ChildrenProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       responseChildren = Children.fromJson(json.decode(response.body));
 
-      print(responseChildren);
 
       notifyListeners();
 

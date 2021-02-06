@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/providers/ChildrenProvider.dart';
 import 'package:scallingupnutrition/providers/EducationCategoryProvider.dart';
 import 'package:scallingupnutrition/providers/EducationProvider.dart';
+import 'package:scallingupnutrition/providers/ImmunizationProvider.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
 import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/providers/UserProvider.dart';
@@ -40,6 +41,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => ChildrenProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ImmunizationProvider(),
         ),
       ],
       child: MaterialApp(

@@ -55,7 +55,7 @@ class BioAnakTile extends StatelessWidget {
                       height: SpacingDimens.spacing4,
                     ),
                     Text(
-                      'TTL : Mojokerto, 03 Oktober 2000',
+                      'TTL : ' + dataAnak.ttl,
                       style: TypographyStyle.caption2.merge(
                         TextStyle(
                           color: PaletteColor.grey60,
@@ -66,7 +66,7 @@ class BioAnakTile extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      'Tinggi Badan : 55 Cm',
+                      'Tinggi Badan : ' + dataAnak.tb.toString() + " Cm",
                       style: TypographyStyle.caption2.merge(
                         TextStyle(
                           color: PaletteColor.grey60,
@@ -77,7 +77,7 @@ class BioAnakTile extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      'Berat Badan : 28 Kg',
+                      'Berat Badan : ' + dataAnak.bb.toString() + " Kg",
                       style: TypographyStyle.caption2.merge(
                         TextStyle(
                           color: PaletteColor.grey60,

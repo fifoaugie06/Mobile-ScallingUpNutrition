@@ -6,8 +6,20 @@ import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
+import 'package:toast/toast.dart';
 
-class DialogTambahAnak extends StatelessWidget {
+class DialogTambahAnak extends StatefulWidget {
+  final BuildContext ctx;
+  final int idUser;
+
+  DialogTambahAnak({@required this.ctx, @required this.idUser});
+
+  @override
+  _DialogTambahAnakState createState() =>
+      _DialogTambahAnakState(ctx: ctx, idUser: idUser);
+}
+
+class _DialogTambahAnakState extends State<DialogTambahAnak> {
   final _namaController = new TextEditingController();
   final _ttlController = new TextEditingController();
   final _tinggiController = new TextEditingController();
@@ -17,10 +29,12 @@ class DialogTambahAnak extends StatelessWidget {
   final BuildContext ctx;
   final int idUser;
 
-  DialogTambahAnak({@required this.ctx, @required this.idUser});
+  _DialogTambahAnakState({@required this.ctx, @required this.idUser});
 
   @override
   Widget build(BuildContext context) {
+    bool _error = false;
+
     return AlertDialog(
       backgroundColor: PaletteColor.primarybg,
       contentPadding: EdgeInsets.all(0.0),
@@ -230,11 +244,37 @@ class DialogTambahAnak extends StatelessWidget {
                   SizedBox(
                     height: SpacingDimens.spacing12,
                   ),
+                  Visibility(
+                    visible: _error,
+                    child: Text(
+                      "*Pastikan Semua telah Terisi",
+                      style: TypographyStyle.mini.merge(
+                        TextStyle(
+                          color: PaletteColor.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: SpacingDimens.spacing8,
+                  ),
                   FlatButton(
                     minWidth: double.infinity,
                     color: PaletteColor.primary,
                     onPressed: () {
-                      createChildren();
+                      print(_error.toString());
+                      if (_namaController.text == "" ||
+                          _tinggiController.text == "" ||
+                          _beratController.text == "" ||
+                          _ttlController.text == "" ||
+                          _anakkeController.text == "") {
+                        Toast.show("Pastikan telah terisi semuanya", ctx,
+                            duration: Toast.LENGTH_SHORT,
+                            gravity: Toast.BOTTOM);
+                      } else {
+                        Navigator.of(context).pop();
+                        createChildren();
+                      }
                     },
                     child: Text(
                       'OK',
@@ -270,6 +310,6 @@ class DialogTambahAnak extends StatelessWidget {
           ),
         );
       }
-    });
+     });
   }
 }

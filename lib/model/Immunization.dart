@@ -1,15 +1,16 @@
 // To parse this JSON data, do
 //
-//     final children = childrenFromJson(jsonString);
+//     final immunization = immunizationFromJson(jsonString);
 
 import 'dart:convert';
 
-Children childrenFromJson(String str) => Children.fromJson(json.decode(str));
+Immunization immunizationFromJson(String str) =>
+    Immunization.fromJson(json.decode(str));
 
-String childrenToJson(Children data) => json.encode(data.toJson());
+String immunizationToJson(Immunization data) => json.encode(data.toJson());
 
-class Children {
-  Children({
+class Immunization {
+  Immunization({
     this.status,
     this.message,
     this.data,
@@ -19,7 +20,7 @@ class Children {
   String message;
   List<Datum> data;
 
-  factory Children.fromJson(Map<String, dynamic> json) => Children(
+  factory Immunization.fromJson(Map<String, dynamic> json) => Immunization(
         status: json["status"],
         message: json["message"],
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
@@ -35,36 +36,24 @@ class Children {
 class Datum {
   Datum({
     this.id,
-    this.userId,
-    this.nama,
-    this.tb,
-    this.bb,
-    this.ttl,
-    this.anakke,
+    this.title,
+    this.description,
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
   });
 
   int id;
-  int userId;
-  String nama;
-  String tb;
-  String bb;
-  String ttl;
-  int anakke;
+  String title;
+  String description;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
-        userId: json["user_id"],
-        nama: json["nama"],
-        tb: json["tb"],
-        bb: json["bb"],
-        ttl: json["ttl"],
-        anakke: json["anakke"],
+        title: json["title"],
+        description: json["description"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
@@ -72,12 +61,8 @@ class Datum {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "user_id": userId,
-        "nama": nama,
-        "tb": tb,
-        "bb": bb,
-        "ttl": ttl,
-        "anakke": anakke,
+        "title": title,
+        "description": description,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "deleted_at": deletedAt,

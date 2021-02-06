@@ -12,4 +12,5 @@ class GlobalEndpoint {
   static const USER_URL = BASE_API_URL + 'users/detail/';
   static const USERS_URL = BASE_API_URL + 'users';
   static const CHILDREN_URL = BASE_API_URL + 'children';
+  static const IMMUNIZATION_URL = BASE_API_URL + 'immunization-schedule';
 }

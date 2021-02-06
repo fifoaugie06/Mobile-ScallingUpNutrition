@@ -3,6 +3,7 @@ import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/EducationPage/EducationPage.dart';
 import 'package:scallingupnutrition/views/LoginPage/LoginPage.dart';
 import 'package:scallingupnutrition/views/MyProfilePage/MyProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,7 +76,13 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                routeTransition(
+                  EducationPage(),
+                ),
+              );
+            },
             child: Container(
               height: 200,
               child: Stack(
