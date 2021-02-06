@@ -86,10 +86,89 @@ class BioAnakPage extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Container(
-                          color: PaletteColor.primarybg,
-                          child: BioAnakTile(
-                            dataAnak: dataChildren.responseChildren.data[index],
+                        child: Dismissible(
+                          key: UniqueKey(),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            child: Align(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 16.0),
+                                child: Icon(
+                                  Icons.delete_sweep,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              alignment: Alignment.centerRight,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                4.0,
+                              ),
+                              color: PaletteColor.red,
+                            ),
+                          ),
+                          confirmDismiss: (DismissDirection direction) async {
+                            final bool res = await showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Konfirmasi'),
+                                    content: Text('Anda Yakin?'),
+                                    actions: [
+                                      FlatButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: Text(
+                                          'Hapus',
+                                          style:
+                                              TypographyStyle.subtitle2.merge(
+                                            TextStyle(
+                                              color: PaletteColor.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: Text(
+                                          'Batalkan',
+                                          style:
+                                              TypographyStyle.subtitle2.merge(
+                                            TextStyle(
+                                              color: PaletteColor.grey80,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                });
+                            return res;
+                          },
+                          onDismissed: (value) {
+                            Provider.of<ChildrenProvider>(context,
+                                    listen: false)
+                                .deleteChildren(dataChildren
+                                    .responseChildren.data[index].id)
+                                .then((value) {
+                              if (value == 200) {
+                                Navigator.of(context).pushReplacement(
+                                  routeTransition(
+                                    BioAnakPage(
+                                      idUser: idUser,
+                                    ),
+                                  ),
+                                );
+                              }
+                            });
+                          },
+                          child: Container(
+                            color: PaletteColor.primarybg,
+                            child: BioAnakTile(
+                              dataAnak:
+                                  dataChildren.responseChildren.data[index],
+                            ),
                           ),
                         ),
                       ),

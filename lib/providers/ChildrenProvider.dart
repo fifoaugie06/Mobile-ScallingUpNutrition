@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/config/GlobalEndpoint.dart';
 import 'package:scallingupnutrition/model/Children.dart';
-import 'package:scallingupnutrition/model/Education.dart';
 import 'package:http/http.dart' as http;
 
 class ChildrenProvider extends ChangeNotifier {
@@ -38,7 +37,23 @@ class ChildrenProvider extends ChangeNotifier {
         'anakke': anakke,
       });
 
-      print(response.body);
+      if (response.statusCode == 200) {
+        return 200;
+      } else {
+        return 400;
+      }
+    } on TimeoutException catch (_) {
+      return 500;
+    } on SocketException catch (_) {
+      return 500;
+    }
+  }
+
+  Future<int> deleteChildren(int id) async {
+    String url = GlobalEndpoint.CHILDREN_URL + '/delete/' + id.toString();
+    try {
+      final response = await http.delete(url);
+
       if (response.statusCode == 200) {
         return 200;
       } else {

@@ -29,10 +29,10 @@ class ImmunizationTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TypographyStyle.subtitle2,
+              style: TypographyStyle.subtitle1,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: SpacingDimens.spacing8),
+              padding: const EdgeInsets.only(top: SpacingDimens.spacing4),
               child: Text(
                 description,
                 style: TypographyStyle.caption1.merge(
