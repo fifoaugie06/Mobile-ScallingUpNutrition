@@ -5,9 +5,9 @@ import 'package:scallingupnutrition/providers/EducationCategoryProvider.dart';
 import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/providers/ImmunizationProvider.dart';
 import 'package:scallingupnutrition/providers/LoginProvider.dart';
+import 'package:scallingupnutrition/providers/PregnancyProvider.dart';
 import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/providers/UserProvider.dart';
-import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
 import 'package:scallingupnutrition/views/SplashScreenPage/SplashScreenPage.dart';
 
 void main() {
@@ -44,6 +44,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => ImmunizationProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PregnancyProvider(),
         ),
       ],
       child: MaterialApp(
