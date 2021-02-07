@@ -14,4 +14,5 @@ class GlobalEndpoint {
   static const CHILDREN_URL = BASE_API_URL + 'children';
   static const IMMUNIZATION_URL = BASE_API_URL + 'immunization-schedule';
   static const PREGNANCY_URL = BASE_API_URL + 'cek-kehamilan';
+  static const PARITAS_URL = BASE_API_URL + 'paritas';
 }

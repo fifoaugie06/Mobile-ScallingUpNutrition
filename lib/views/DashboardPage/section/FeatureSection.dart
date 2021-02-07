@@ -6,6 +6,7 @@ import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
 import 'package:scallingupnutrition/views/HPHTPage/HPHTPage.dart';
+import 'package:scallingupnutrition/views/ParitasPage/ParitasPage.dart';
 
 class FeatureSection extends StatelessWidget {
   final int idUser;
@@ -38,7 +39,15 @@ class FeatureSection extends StatelessWidget {
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),
-                featureTile(title: "Paritas", icon: Icons.room, onTap: () {}),
+                featureTile(title: "Paritas", icon: Icons.room, onTap: () {
+                  Navigator.of(context).push(
+                    routeTransition(
+                      ParitasPage(
+                        idUser: idUser,
+                      ),
+                    ),
+                  );
+                }),
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),
