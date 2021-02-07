@@ -6,7 +6,9 @@ import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/CekKehamilanPage/CekKehamilanTambahPage.dart';
 import 'package:scallingupnutrition/views/CekKehamilanPage/component/CekKehamilanTile.dart';
+import 'package:intl/intl.dart';
 
 class CekKehamilanPage extends StatelessWidget {
   final int idUser;
@@ -36,7 +38,13 @@ class CekKehamilanPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            routeTransition(
+              CekKehamilanTambahPage(idUser: idUser, ctx: context),
+            ),
+          );
+        },
         child: Icon(
           Icons.add,
         ),
@@ -60,6 +68,11 @@ class CekKehamilanPage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: dataPregnancy.responsePregnancy.data.length,
                   itemBuilder: (context, index) {
+                    var data = dataPregnancy.responsePregnancy.data[index];
+
+                    String formattedDate =
+                        DateFormat('dd MMMM yyyy').format(data.createdAt);
+
                     return GestureDetector(
                       onTap: () {},
                       child: Dismissible(
@@ -122,7 +135,7 @@ class CekKehamilanPage extends StatelessWidget {
                         },
                         onDismissed: (value) {
                           Provider.of<PregnancyProvider>(context, listen: false)
-                              .deletePregnancy(idUser)
+                              .deletePregnancy(data.id)
                               .then((value) {
                             if (value == 200) {
                               Navigator.of(context).pushReplacement(
@@ -136,9 +149,9 @@ class CekKehamilanPage extends StatelessWidget {
                           });
                         },
                         child: CekKehamilanTile(
-                          title: dataPregnancy
+                          title: formattedDate,
+                          description: dataPregnancy
                               .responsePregnancy.data[index].pemeriksa,
-                          description: "yy",
                         ),
                       ),
                     );

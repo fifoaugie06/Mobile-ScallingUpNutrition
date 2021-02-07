@@ -30,10 +30,10 @@ class CekKehamilanTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TypographyStyle.subtitle1,
+              style: TypographyStyle.subtitle2,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: SpacingDimens.spacing4),
+              padding: const EdgeInsets.only(top: SpacingDimens.spacing8),
               child: Text(
                 description,
                 style: TypographyStyle.caption1.merge(
