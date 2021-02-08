@@ -6,6 +6,7 @@ import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/CekKehamilanPage/CekKehamilanDetailPage.dart';
 import 'package:scallingupnutrition/views/CekKehamilanPage/CekKehamilanTambahPage.dart';
 import 'package:scallingupnutrition/views/CekKehamilanPage/component/CekKehamilanTile.dart';
 import 'package:intl/intl.dart';
@@ -74,7 +75,15 @@ class CekKehamilanPage extends StatelessWidget {
                         DateFormat('dd MMMM yyyy').format(data.createdAt);
 
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          routeTransition(
+                            CekKehamilanDetailPage(
+                              data: data,
+                            ),
+                          ),
+                        );
+                      },
                       child: Dismissible(
                         key: UniqueKey(),
                         direction: DismissDirection.endToStart,

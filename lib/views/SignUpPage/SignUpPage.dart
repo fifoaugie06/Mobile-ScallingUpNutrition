@@ -3,16 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/component/Dialog/DialogFailed.dart';
 import 'package:scallingupnutrition/component/Dialog/DialogSuccess.dart';
 import 'package:scallingupnutrition/component/Indicator/IndicatorLoad.dart';
-import 'package:scallingupnutrition/config/GlobalKeySharedPref.dart';
-import 'package:scallingupnutrition/providers/LoginProvider.dart';
 import 'package:scallingupnutrition/providers/RegisterProvider.dart';
 import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
-import 'package:scallingupnutrition/views/DashboardPage/DashboardPage.dart';
 import 'package:scallingupnutrition/views/LoginPage/LoginPage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 import 'component/MainForms.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -134,6 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               if (_passwordFilter.text ==
                                   _confirmationPasswordFilter.text) {
                                 onPressedFunction(context);
+                              }else{
+                                Toast.show("Password tidak sama", context, duration: Toast.LENGTH_LONG);
                               }
                             },
                             child: Text(
