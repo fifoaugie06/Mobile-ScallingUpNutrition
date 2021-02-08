@@ -56,6 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
           IconButton(
             icon: Icon(
               Icons.phone,
+              size: 20,
             ),
             onPressed: _launchURL,
           ),
@@ -79,13 +80,12 @@ class _DashboardPageState extends State<DashboardPage> {
             }
             return Consumer2<EducationProvider, EducationProvider>(
               builder: (context, dataEducation, dataEducationRandom, _) {
-                // print(dataEducationRandom.responseEducationRandom.data);
                 return SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
                     children: [
                       CarouselSection(
-                        dataEducationRandom: dataEducationRandom,
+                        data: dataEducationRandom.responseEducationRandom.data,
                       ),
                       FeatureSection(
                         idUser: widget.idUser,

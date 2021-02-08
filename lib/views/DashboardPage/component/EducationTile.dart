@@ -20,7 +20,7 @@ class EducationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('dd MMMM yyyy HH:mm').format(createdAt);
+    String formattedDate = DateFormat('dd MMMM yyyy').format(createdAt);
 
     return Column(
       children: [

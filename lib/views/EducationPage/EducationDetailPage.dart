@@ -20,7 +20,7 @@ class EducationDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String formattedDate =
-        DateFormat('dd MMMM yyyy HH:mm').format(createdAt);
+        DateFormat('dd MMMM yyyy').format(createdAt);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,8 +44,10 @@ class EducationDetailPage extends StatelessWidget {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: SpacingDimens.spacing16,
+          margin: EdgeInsets.only(
+            left: SpacingDimens.spacing16,
+            right: SpacingDimens.spacing16,
+            bottom: SpacingDimens.spacing16,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,

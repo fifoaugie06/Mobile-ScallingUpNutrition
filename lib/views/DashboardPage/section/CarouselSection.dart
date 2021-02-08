@@ -1,14 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:scallingupnutrition/providers/EducationProvider.dart';
+import 'package:scallingupnutrition/config/GlobalEndpoint.dart';
+import 'package:scallingupnutrition/model/Education.dart';
+import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/EducationPage/EducationDetailPage.dart';
 
 class CarouselSection extends StatefulWidget {
-  final EducationProvider dataEducationRandom;
+  final List<Datum> data;
 
-  CarouselSection({@required this.dataEducationRandom});
+  CarouselSection({@required this.data});
 
   @override
   _CarouselSectionState createState() => _CarouselSectionState();
@@ -16,11 +19,12 @@ class CarouselSection extends StatefulWidget {
 
 class _CarouselSectionState extends State<CarouselSection> {
   int _current = 0;
-  List _imgList = [
-    'slide1.jpg',
-    'slide2.jpg',
-    'slide3.jpg',
-  ];
+
+  // List _imgList = [
+  //   'slide1.jpg',
+  //   'slide2.jpg',
+  //   'slide3.jpg',
+  // ];
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -55,11 +59,12 @@ class _CarouselSectionState extends State<CarouselSection> {
                       _current = index;
                     });
                   }),
-              items: _imgList.map(
-                (imgUrl) {
+              items: widget.data.map(
+                (data) {
                   return Builder(
                     builder: (BuildContext context) {
-                      return imageContent(imgUrl);
+                      return imageContent(data.photo, data.title, data.content,
+                          data.educationcategory.title, data.createdAt);
                     },
                   );
                 },
@@ -69,7 +74,7 @@ class _CarouselSectionState extends State<CarouselSection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: map<Widget>(
-              _imgList,
+              widget.data,
               (index, url) {
                 return Container(
                   width: 20.0,
@@ -101,7 +106,13 @@ class _CarouselSectionState extends State<CarouselSection> {
     );
   }
 
-  Widget imageContent(imgUrl) {
+  Widget imageContent(
+    String imgUrl,
+    String title,
+    String content,
+    String category,
+    DateTime createdAt,
+  ) {
     return Stack(
       children: [
         Container(
@@ -112,22 +123,22 @@ class _CarouselSectionState extends State<CarouselSection> {
               4.0,
             ),
             image: DecorationImage(
-              image: AssetImage(
-                'assets/images/carousel/$imgUrl',
+              image: NetworkImage(
+                GlobalEndpoint.BASE_STORAGE_URL + imgUrl,
               ),
               fit: BoxFit.cover,
             ),
           ),
         ),
         Container(
-          width: MediaQuery.of(context).size.width / 1.8,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
-              stops: [0.1, 0.9],
+              stops: [0.1, 0.6],
               colors: [
-                PaletteColor.grey.withOpacity(.5),
-                Color(0xFF5D5D5D).withOpacity(0),
+                PaletteColor.black.withOpacity(0.6),
+                PaletteColor.black.withOpacity(0.2),
               ],
             ),
             borderRadius: BorderRadius.circular(
@@ -135,45 +146,64 @@ class _CarouselSectionState extends State<CarouselSection> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(
-            SpacingDimens.spacing24,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Let\'s Join!',
-                style: TypographyStyle.title.merge(
-                  TextStyle(
-                    color: PaletteColor.primarybg,
-                  ),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              routeTransition(
+                EducationDetailPage(
+                  title: title,
+                  category: category,
+                  createdAt: createdAt,
+                  photo: imgUrl,
+                  content: content,
                 ),
               ),
-              SizedBox(
-                height: SpacingDimens.spacing8,
-              ),
-              Text(
-                'Workshop Python Basic 1.0',
-                style: TypographyStyle.paragraph.merge(
-                  TextStyle(
-                    color: PaletteColor.primarybg,
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.all(
+              SpacingDimens.spacing24,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TypographyStyle.subtitle1.merge(
+                    TextStyle(
+                      color: PaletteColor.primarybg,
+                    ),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: SpacingDimens.spacing8,
+                ),
+                Text(
+                  content,
+                  style: TypographyStyle.paragraph.merge(
+                    TextStyle(
+                      color: PaletteColor.primarybg,
+                    ),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: SpacingDimens.spacing24,
+                ),
+                Text(
+                  'Read more',
+                  style: TypographyStyle.caption2.merge(
+                    TextStyle(
+                      color: PaletteColor.primary,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: SpacingDimens.spacing24,
-              ),
-              Text(
-                'Read more',
-                style: TypographyStyle.caption2.merge(
-                  TextStyle(
-                    color: PaletteColor.primary,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
