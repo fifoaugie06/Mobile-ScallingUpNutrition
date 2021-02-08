@@ -9,6 +9,7 @@ import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/CarouselSection.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/EducationSection.dart';
 import 'package:scallingupnutrition/views/DashboardPage/section/FeatureSection.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'component/NavDrawer.dart';
 
@@ -39,7 +40,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       appBar: AppBar(
         title: Text(
-          'SCALLING UP NUTRITION',
+          'Scalling Up Nutrition',
           style: TypographyStyle.subtitle1.merge(
             TextStyle(
                 color: PaletteColor.primarybg, fontWeight: FontWeight.w700),
@@ -51,6 +52,14 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           onPressed: () => _scaffoldDashboard.currentState.openDrawer(),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.phone,
+            ),
+            onPressed: _launchURL,
+          ),
+        ],
         backgroundColor: PaletteColor.primary,
       ),
       body: RefreshIndicator(
@@ -61,18 +70,23 @@ class _DashboardPageState extends State<DashboardPage> {
           future: Future.wait([
             Provider.of<EducationProvider>(context, listen: false)
                 .getEducation(),
+            Provider.of<EducationProvider>(context, listen: false)
+                .getEducationRandom(),
           ]),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return indicatorLoad();
             }
-            return Consumer<EducationProvider>(
-              builder: (context, dataEducation, _) {
+            return Consumer2<EducationProvider, EducationProvider>(
+              builder: (context, dataEducation, dataEducationRandom, _) {
+                // print(dataEducationRandom.responseEducationRandom.data);
                 return SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      CarouselSection(),
+                      CarouselSection(
+                        dataEducationRandom: dataEducationRandom,
+                      ),
                       FeatureSection(
                         idUser: widget.idUser,
                       ),
@@ -88,5 +102,15 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       ),
     );
+  }
+
+  _launchURL() async {
+    String msg = "Assalamualaikum, dengan Ibu Sarwenda ? Boleh kah saya berkonsultasi ?";
+    var url = 'https://wa.me/6289665954222?text=' + msg;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -1,10 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/providers/EducationProvider.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 
 class CarouselSection extends StatefulWidget {
+  final EducationProvider dataEducationRandom;
+
+  CarouselSection({@required this.dataEducationRandom});
+
   @override
   _CarouselSectionState createState() => _CarouselSectionState();
 }

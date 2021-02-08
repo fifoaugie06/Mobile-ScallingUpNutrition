@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scallingupnutrition/component/Animation/ScaleTileTransition.dart';
 import 'package:scallingupnutrition/route/RouteTransisition.dart';
+import 'package:scallingupnutrition/theme/IconComponent.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
@@ -27,7 +28,7 @@ class FeatureSection extends StatelessWidget {
               children: [
                 featureTile(
                   title: "HPHT",
-                  icon: Icons.room,
+                  icon: IconComponent.hpht,
                   onTap: () {
                     Navigator.of(context).push(
                       routeTransition(
@@ -39,21 +40,24 @@ class FeatureSection extends StatelessWidget {
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),
-                featureTile(title: "Paritas", icon: Icons.room, onTap: () {
-                  Navigator.of(context).push(
-                    routeTransition(
-                      ParitasPage(
-                        idUser: idUser,
-                      ),
-                    ),
-                  );
-                }),
+                featureTile(
+                    title: "Paritas",
+                    icon: IconComponent.paritas,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        routeTransition(
+                          ParitasPage(
+                            idUser: idUser,
+                          ),
+                        ),
+                      );
+                    }),
                 SizedBox(
                   width: SpacingDimens.spacing16,
                 ),
                 featureTile(
                   title: "Bio Anak",
-                  icon: Icons.room,
+                  icon: IconComponent.bio,
                   onTap: () {
                     Navigator.of(context).push(
                       routeTransition(
