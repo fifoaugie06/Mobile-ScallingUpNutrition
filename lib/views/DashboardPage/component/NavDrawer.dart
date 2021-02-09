@@ -3,6 +3,7 @@ import 'package:scallingupnutrition/route/RouteTransisition.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
+import 'package:scallingupnutrition/views/BMIPage/BMIPage.dart';
 import 'package:scallingupnutrition/views/BioAnakPage/BioAnakPage.dart';
 import 'package:scallingupnutrition/views/CekKehamilanPage/CekKehamilanPage.dart';
 import 'package:scallingupnutrition/views/EducationPage/EducationPage.dart';
@@ -227,6 +228,59 @@ class NavDrawer extends StatelessWidget {
                           ),
                           child: Text(
                             'Catat dan dokumentasikan sekarang juga anak - anak anda',
+                            style: TypographyStyle.subtitle2.merge(
+                              TextStyle(
+                                color: PaletteColor.primarybg,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                routeTransition(
+                  BMIPage(),
+                ),
+              );
+            },
+            child: Container(
+              height: 200,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                          image: new AssetImage('assets/images/bmi.png'),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'BMI',
+                          style: TypographyStyle.heading1.merge(
+                            TextStyle(
+                              color: PaletteColor.primarybg,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            right: SpacingDimens.spacing24,
+                          ),
+                          child: Text(
+                            'Kalkulasikan Indeks Massa Tubuh anda sekarang juga',
                             style: TypographyStyle.subtitle2.merge(
                               TextStyle(
                                 color: PaletteColor.primarybg,

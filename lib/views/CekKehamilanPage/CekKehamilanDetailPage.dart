@@ -12,8 +12,7 @@ class CekKehamilanDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate =
-        DateFormat('dd MMMM yyyy').format(data.createdAt);
+    String formattedDate = DateFormat('dd MMMM yyyy').format(data.createdAt);
 
     return Scaffold(
       backgroundColor: PaletteColor.primarybg,
@@ -43,14 +42,44 @@ class CekKehamilanDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: SpacingDimens.spacing24,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 60,
+                padding:
+                    EdgeInsets.symmetric(horizontal: SpacingDimens.spacing16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.0),
+                  color: PaletteColor.primarybg2,
+                ),
+                child: Center(
+                  child: Text(
+                    data.lila < 23.5
+                        ? 'Anda berisiko mengalami KEK / Kurang Energi Kronis'
+                        : 'Anda tidak berisiko mengalami KEK / Kurang Energi Kronis',
+                    style: TypographyStyle.subtitle2.merge(
+                      TextStyle(
+                        color: data.lila < 23.5
+                            ? PaletteColor.blue
+                            : PaletteColor.green,
+                      ),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
               contentKehamilan(
                   "Nama Pemeriksa atau Tempat Pelayanan", data.pemeriksa),
               contentKehamilan("Tanggal", formattedDate),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  contentKehamilan("U.K (mg)", data.usiakehamilan.toString() + " mg"),
-                  contentKehamilan("Berat Badan (kg)", data.beratbadan.toString() + " kg"),
+                  contentKehamilan(
+                      "U.K (mg)", data.usiakehamilan.toString() + " mg"),
+                  contentKehamilan(
+                      "Berat Badan (kg)", data.beratbadan.toString() + " kg"),
                   contentKehamilan("TD (mmhg)", data.tekanan),
                 ],
               ),
@@ -58,8 +87,10 @@ class CekKehamilanDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   contentKehamilan("Lila (cm)", data.lila.toString() + " cm"),
-                  contentKehamilan("Tinggi Fundus (cm)", data.fundus.toString() + " cm"),
-                  contentKehamilan("Letak Janin, DJJ", data.janin.toString() + "x / mm"),
+                  contentKehamilan(
+                      "Tinggi Fundus (cm)", data.fundus.toString() + " cm"),
+                  contentKehamilan(
+                      "Letak Janin, DJJ", data.janin.toString() + "x / mm"),
                 ],
               ),
               contentKehamilan("Imunisasi", data.imunisasi),
@@ -68,6 +99,9 @@ class CekKehamilanDetailPage extends StatelessWidget {
               contentKehamilan("Analisa", data.analisa),
               contentKehamilan("Tata Laksana", data.tatalaksana),
               contentKehamilan("Konseling", data.konseling),
+              SizedBox(
+                height: SpacingDimens.spacing32,
+              ),
             ],
           ),
         ),

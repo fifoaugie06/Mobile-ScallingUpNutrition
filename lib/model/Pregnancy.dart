@@ -62,7 +62,7 @@ class Datum {
   int usiakehamilan;
   int beratbadan;
   String tekanan;
-  int lila;
+  double lila;
   int fundus;
   int janin;
   String imunisasi;
@@ -83,7 +83,7 @@ class Datum {
         usiakehamilan: json["usiakehamilan"],
         beratbadan: json["beratbadan"],
         tekanan: json["tekanan"],
-        lila: json["lila"],
+        lila: json["lila"].toDouble(),
         fundus: json["fundus"],
         janin: json["janin"],
         imunisasi: json["imunisasi"],
