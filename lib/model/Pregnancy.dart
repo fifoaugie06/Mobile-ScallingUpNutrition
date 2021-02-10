@@ -60,11 +60,11 @@ class Datum {
   String pemeriksa;
   String keluhan;
   int usiakehamilan;
-  int beratbadan;
+  double beratbadan;
   String tekanan;
   double lila;
-  int fundus;
-  int janin;
+  double fundus;
+  double janin;
   String imunisasi;
   String tablet;
   String lab;

@@ -44,7 +44,6 @@ class Datum {
     this.komplikasi,
     this.jeniskelamin,
     this.bb,
-    this.tb,
     this.nifasLaktasi,
     this.nifasKomplikasi,
     this.createdAt,
@@ -61,8 +60,7 @@ class Datum {
   String penolong;
   String komplikasi;
   String jeniskelamin;
-  int bb;
-  int tb;
+  double bb;
   String nifasLaktasi;
   String nifasKomplikasi;
   DateTime createdAt;
@@ -79,8 +77,7 @@ class Datum {
         penolong: json["penolong"],
         komplikasi: json["komplikasi"],
         jeniskelamin: json["jeniskelamin"],
-        bb: json["bb"],
-        tb: json["tb"],
+        bb: json["bb"].toDouble(),
         nifasLaktasi: json["nifas_laktasi"],
         nifasKomplikasi: json["nifas_komplikasi"],
         createdAt: DateTime.parse(json["created_at"]),
@@ -100,7 +97,6 @@ class Datum {
         "komplikasi": komplikasi,
         "jeniskelamin": jeniskelamin,
         "bb": bb,
-        "tb": tb,
         "nifas_laktasi": nifasLaktasi,
         "nifas_komplikasi": nifasKomplikasi,
         "created_at": createdAt.toIso8601String(),
