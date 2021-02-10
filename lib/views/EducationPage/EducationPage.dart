@@ -85,87 +85,93 @@ class _EducationNavigationPageState extends State<EducationNavigationPage> {
         padding: EdgeInsets.all(
           SpacingDimens.spacing12,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: data.length,
-                itemBuilder: (context, idx) {
-                  return Container(
-                    margin: EdgeInsets.only(
-                      left: idx == 0 ? 0 : SpacingDimens.spacing8,
-                    ),
-                    child: ChoiceChip(
-                      label: Text(
-                        data[idx].title,
-                        style: TypographyStyle.caption2.merge(
-                          TextStyle(
-                            color: data[idx].id != idSelected
-                                ? PaletteColor.grey60
-                                : PaletteColor.primarybg,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 50,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: data.length,
+                  itemBuilder: (context, idx) {
+                    return Container(
+                      margin: EdgeInsets.only(
+                        left: idx == 0 ? 0 : SpacingDimens.spacing8,
+                      ),
+                      child: ChoiceChip(
+                        label: Text(
+                          data[idx].title,
+                          style: TypographyStyle.caption2.merge(
+                            TextStyle(
+                              color: data[idx].id != idSelected
+                                  ? PaletteColor.grey60
+                                  : PaletteColor.primarybg,
+                            ),
+                          ),
+                        ),
+                        selected: idSelected == data[idx].id,
+                        onSelected: (_) => setState(
+                          () {
+                            idSelected = data[idx].id;
+                            idArr = idx;
+                          },
+                        ),
+                        selectedColor: PaletteColor.primary,
+                        backgroundColor: PaletteColor.primarybg,
+                        shape: StadiumBorder(
+                          side: BorderSide(
+                            color: PaletteColor.grey40,
                           ),
                         ),
                       ),
-                      selected: idSelected == data[idx].id,
-                      onSelected: (_) => setState(
-                        () {
-                          idSelected = data[idx].id;
-                          idArr = idx;
-                        },
-                      ),
-                      selectedColor: PaletteColor.primary,
-                      backgroundColor: PaletteColor.primarybg,
-                      shape: StadiumBorder(
-                        side: BorderSide(
-                          color: PaletteColor.grey40,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: data.length == 0 ? 0 : data[idArr].education.length,
+                itemBuilder: (context, idx) {
+                  var dataEducation = data[idArr].education[idx];
+
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        routeTransition(
+                          EducationDetailPage(
+                            title: dataEducation.title,
+                            category: data[idArr].title,
+                            content: dataEducation.content,
+                            photo: dataEducation.photo,
+                            createdAt: dataEducation.createdAt,
+                          ),
                         ),
+                      );
+                    },
+                    child: Container(
+                      color: PaletteColor.primarybg,
+                      margin: EdgeInsets.only(
+                        top: idx == 0 ? 0 : SpacingDimens.spacing16,
+                      ),
+                      child: EducationTile(
+                        title: dataEducation.title,
+                        category: data[idArr].title,
+                        content: dataEducation.content,
+                        photo: dataEducation.photo,
+                        createdAt: dataEducation.createdAt,
                       ),
                     ),
                   );
                 },
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: data.length == 0 ? 0 : data[idArr].education.length,
-              itemBuilder: (context, idx) {
-                var dataEducation = data[idArr].education[idx];
-
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      routeTransition(
-                        EducationDetailPage(
-                          title: dataEducation.title,
-                          category: data[idArr].title,
-                          content: dataEducation.content,
-                          photo: dataEducation.photo,
-                          createdAt: dataEducation.createdAt,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    color: PaletteColor.primarybg,
-                    child: EducationTile(
-                      title: dataEducation.title,
-                      category: data[idArr].title,
-                      content: dataEducation.content,
-                      photo: dataEducation.photo,
-                      createdAt: dataEducation.createdAt,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

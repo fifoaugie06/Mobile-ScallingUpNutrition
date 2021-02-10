@@ -90,7 +90,7 @@ class CekKehamilanDetailPage extends StatelessWidget {
                   contentKehamilan(
                       "Tinggi Fundus (cm)", data.fundus.toString() + " cm"),
                   contentKehamilan(
-                      "Letak Janin, DJJ", data.janin.toString() + "x / mm"),
+                      "Detak Janin, DJJ", data.janin.toString() + "x / mm"),
                 ],
               ),
               contentKehamilan("Imunisasi", data.imunisasi),

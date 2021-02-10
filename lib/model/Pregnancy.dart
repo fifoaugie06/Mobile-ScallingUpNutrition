@@ -20,16 +20,16 @@ class Pregnancy {
   List<Datum> data;
 
   factory Pregnancy.fromJson(Map<String, dynamic> json) => Pregnancy(
-        status: json["status"],
-        message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-      );
+    status: json["status"],
+    message: json["message"],
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "status": status,
-        "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
+    "status": status,
+    "message": message,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+  };
 }
 
 class Datum {
@@ -64,7 +64,7 @@ class Datum {
   String tekanan;
   double lila;
   double fundus;
-  double janin;
+  int janin;
   String imunisasi;
   String tablet;
   String lab;
@@ -76,46 +76,46 @@ class Datum {
   dynamic deletedAt;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        id: json["id"],
-        userId: json["user_id"],
-        pemeriksa: json["pemeriksa"],
-        keluhan: json["keluhan"],
-        usiakehamilan: json["usiakehamilan"],
-        beratbadan: json["beratbadan"],
-        tekanan: json["tekanan"],
-        lila: json["lila"].toDouble(),
-        fundus: json["fundus"],
-        janin: json["janin"],
-        imunisasi: json["imunisasi"],
-        tablet: json["tablet"],
-        lab: json["lab"],
-        analisa: json["analisa"],
-        tatalaksana: json["tatalaksana"],
-        konseling: json["konseling"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: json["deleted_at"],
-      );
+    id: json["id"],
+    userId: json["user_id"],
+    pemeriksa: json["pemeriksa"],
+    keluhan: json["keluhan"],
+    usiakehamilan: json["usiakehamilan"],
+    beratbadan: json["beratbadan"].toDouble(),
+    tekanan: json["tekanan"],
+    lila: json["lila"].toDouble(),
+    fundus: json["fundus"].toDouble(),
+    janin: json["janin"],
+    imunisasi: json["imunisasi"],
+    tablet: json["tablet"],
+    lab: json["lab"],
+    analisa: json["analisa"],
+    tatalaksana: json["tatalaksana"],
+    konseling: json["konseling"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    deletedAt: json["deleted_at"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "pemeriksa": pemeriksa,
-        "keluhan": keluhan,
-        "usiakehamilan": usiakehamilan,
-        "beratbadan": beratbadan,
-        "tekanan": tekanan,
-        "lila": lila,
-        "fundus": fundus,
-        "janin": janin,
-        "imunisasi": imunisasi,
-        "tablet": tablet,
-        "lab": lab,
-        "analisa": analisa,
-        "tatalaksana": tatalaksana,
-        "konseling": konseling,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt,
-      };
+    "id": id,
+    "user_id": userId,
+    "pemeriksa": pemeriksa,
+    "keluhan": keluhan,
+    "usiakehamilan": usiakehamilan,
+    "beratbadan": beratbadan,
+    "tekanan": tekanan,
+    "lila": lila,
+    "fundus": fundus,
+    "janin": janin,
+    "imunisasi": imunisasi,
+    "tablet": tablet,
+    "lab": lab,
+    "analisa": analisa,
+    "tatalaksana": tatalaksana,
+    "konseling": konseling,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "deleted_at": deletedAt,
+  };
 }
