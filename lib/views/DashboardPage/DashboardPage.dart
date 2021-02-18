@@ -105,7 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   _launchURL() async {
-    String msg = "Assalamualaikum, dengan Ibu Sarwenda ? Boleh kah saya berkonsultasi ?";
+    String msg = "Assalamualaikum, dengan Bidan Siadari ? Boleh kah saya berkonsultasi ?";
     var url = 'https://wa.me/6289665954222?text=' + msg;
     if (await canLaunch(url)) {
       await launch(url);

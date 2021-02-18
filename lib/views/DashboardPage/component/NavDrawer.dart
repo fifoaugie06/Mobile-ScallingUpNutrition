@@ -340,18 +340,21 @@ class NavDrawer extends StatelessWidget {
               },
             ),
           ),
-//          SizedBox(
-//            height: 100,
-//          ),
-//          Text(
-//            'Copyright \u00a9 2020\n Prodita - Smart Nursing',
-//            style: TextStyle(
-//                color: Color(0xFF707070), letterSpacing: 1.5, height: 1.5),
-//            textAlign: TextAlign.center,
-//          ),
-//          SizedBox(
-//            height: 16,
-//          ),
+          SizedBox(
+            height: 24,
+          ),
+          Text(
+            'Sarwenda Siadar,S.Tr.Keb\n Scalling Up Nutrition',
+            style: TypographyStyle.subtitle2.merge(
+              TextStyle(
+                color: PaletteColor.grey60,
+              ),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 16,
+          ),
         ],
       ),
     );

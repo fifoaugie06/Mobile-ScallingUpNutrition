@@ -41,6 +41,10 @@ class Data {
     this.bb,
     this.ttl,
     this.address,
+    this.pekerjaan,
+    this.pendidikan,
+    this.agama,
+    this.suku,
     this.email,
     this.verifiedAt,
     this.createdAt,
@@ -53,8 +57,12 @@ class Data {
   String fullname;
   dynamic tb;
   dynamic bb;
-  String ttl;
+  dynamic ttl;
   dynamic address;
+  dynamic pekerjaan;
+  dynamic pendidikan;
+  dynamic agama;
+  dynamic suku;
   String email;
   DateTime verifiedAt;
   DateTime createdAt;
@@ -69,6 +77,10 @@ class Data {
         bb: json["bb"],
         ttl: json["ttl"],
         address: json["address"],
+        pekerjaan: json["pekerjaan"],
+        pendidikan: json["pendidikan"],
+        agama: json["agama"],
+        suku: json["suku"],
         email: json["email"],
         verifiedAt: DateTime.parse(json["verified_at"]),
         createdAt: DateTime.parse(json["created_at"]),
@@ -84,6 +96,10 @@ class Data {
         "bb": bb,
         "ttl": ttl,
         "address": address,
+        "pekerjaan": pekerjaan,
+        "pendidikan": pendidikan,
+        "agama": agama,
+        "suku": suku,
         "email": email,
         "verified_at": verifiedAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
