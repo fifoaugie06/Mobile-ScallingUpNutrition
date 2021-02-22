@@ -40,6 +40,8 @@ class Datum {
     this.tb,
     this.bb,
     this.ttl,
+    this.jeniskelamin,
+    this.umur,
     this.anakke,
     this.createdAt,
     this.updatedAt,
@@ -52,6 +54,8 @@ class Datum {
   String tb;
   String bb;
   String ttl;
+  String jeniskelamin;
+  int umur;
   int anakke;
   DateTime createdAt;
   DateTime updatedAt;
@@ -64,6 +68,8 @@ class Datum {
         tb: json["tb"],
         bb: json["bb"],
         ttl: json["ttl"],
+        jeniskelamin: json["jeniskelamin"],
+        umur: json["umur"],
         anakke: json["anakke"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -77,6 +83,8 @@ class Datum {
         "tb": tb,
         "bb": bb,
         "ttl": ttl,
+        "jeniskelamin": jeniskelamin,
+        "umur": umur,
         "anakke": anakke,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

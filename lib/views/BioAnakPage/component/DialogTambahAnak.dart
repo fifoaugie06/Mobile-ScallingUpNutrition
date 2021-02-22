@@ -24,7 +24,9 @@ class _DialogTambahAnakState extends State<DialogTambahAnak> {
   final _ttlController = new TextEditingController();
   final _tinggiController = new TextEditingController();
   final _beratController = new TextEditingController();
+  final _usiaController = new TextEditingController();
   final _anakkeController = new TextEditingController();
+  String dropdownValue = 'pria';
 
   final BuildContext ctx;
   final int idUser;
@@ -211,6 +213,69 @@ class _DialogTambahAnakState extends State<DialogTambahAnak> {
                     height: SpacingDimens.spacing12,
                   ),
                   Text(
+                    "Jenis Kelamin",
+                    style: TypographyStyle.mini.merge(
+                      TextStyle(
+                        color: PaletteColor.grey60,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: DropdownButton(
+                      value: dropdownValue,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          dropdownValue = newValue;
+                        });
+                      },
+                      items: <String>['pria', 'wanita']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: SpacingDimens.spacing12,
+                  ),
+                  Text(
+                    "Usia (Bulan)",
+                    style: TypographyStyle.mini.merge(
+                      TextStyle(
+                        color: PaletteColor.grey60,
+                      ),
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _usiaController,
+                    cursorColor: PaletteColor.primary,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                        left: SpacingDimens.spacing16,
+                        top: SpacingDimens.spacing8,
+                        bottom: SpacingDimens.spacing8,
+                      ),
+                      hintText: "Usia",
+                      hintStyle: TypographyStyle.paragraph.merge(
+                        TextStyle(
+                          color: PaletteColor.grey60,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: PaletteColor.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: SpacingDimens.spacing12,
+                  ),
+                  Text(
                     "Anak Ke-",
                     style: TypographyStyle.mini.merge(
                       TextStyle(
@@ -267,7 +332,8 @@ class _DialogTambahAnakState extends State<DialogTambahAnak> {
                           _tinggiController.text == "" ||
                           _beratController.text == "" ||
                           _ttlController.text == "" ||
-                          _anakkeController.text == "") {
+                          _anakkeController.text == "" ||
+                          _usiaController.text == "") {
                         Toast.show("Pastikan telah terisi semuanya", ctx,
                             duration: Toast.LENGTH_SHORT,
                             gravity: Toast.BOTTOM);
@@ -298,8 +364,15 @@ class _DialogTambahAnakState extends State<DialogTambahAnak> {
     final postState = Provider.of<ChildrenProvider>(ctx, listen: false);
 
     postState
-        .createChildren(idUser, _namaController.text, _tinggiController.text,
-            _beratController.text, _ttlController.text, _anakkeController.text)
+        .createChildren(
+            idUser,
+            _namaController.text,
+            _tinggiController.text,
+            _beratController.text,
+            _ttlController.text,
+            _usiaController.text,
+            dropdownValue,
+            _anakkeController.text)
         .then((value) {
       if (value == 200) {
         Navigator.of(ctx).pushReplacement(
@@ -310,6 +383,6 @@ class _DialogTambahAnakState extends State<DialogTambahAnak> {
           ),
         );
       }
-     });
+    });
   }
 }

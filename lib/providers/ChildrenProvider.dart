@@ -26,7 +26,7 @@ class ChildrenProvider extends ChangeNotifier {
   }
 
   Future<int> createChildren(int id, String nama, String tb, String bb,
-      String ttl, String anakke) async {
+      String ttl, String usia, String jeniskelamin, String anakke) async {
     String url = GlobalEndpoint.CHILDREN_URL + '/store/' + id.toString();
     try {
       final response = await http.post(url, body: {
@@ -34,6 +34,8 @@ class ChildrenProvider extends ChangeNotifier {
         'tb': tb,
         'bb': bb,
         'ttl': ttl,
+        'jeniskelamin': jeniskelamin,
+        'umur': usia,
         'anakke': anakke,
       });
 
