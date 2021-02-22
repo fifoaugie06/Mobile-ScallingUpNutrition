@@ -106,7 +106,7 @@ class _HPHTPageState extends State<HPHTPage> {
                     height: SpacingDimens.spacing8,
                   ),
                   Text(
-                    'Simkecil diperkirakan lahir pada tanggal ' + result,
+                    'Si kecil diperkirakan lahir pada tanggal ' + result + " Dan diperkirakan berumur " + _currentDate2.difference(_currentDate).inDays.toString() + " Hari",
                     style: TypographyStyle.subtitle2,
                   ),
                 ],

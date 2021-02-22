@@ -18,6 +18,10 @@ class DialogEditProfile extends StatelessWidget {
   final _beratController = new TextEditingController();
   final _ttlController = new TextEditingController();
   final _alamatController = new TextEditingController();
+  final _pekerjaanController = new TextEditingController();
+  final _pendidikanController = new TextEditingController();
+  final _agamaController = new TextEditingController();
+  final _sukuController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,10 @@ class DialogEditProfile extends StatelessWidget {
         _beratController.text = data.bb == null ? "" : data.bb.toString();
         _ttlController.text = data.ttl;
         _alamatController.text = data.address;
+        _pekerjaanController.text = data.pekerjaan;
+        _pendidikanController.text = data.pendidikan;
+        _agamaController.text = data.agama;
+        _sukuController.text = data.suku;
 
         return AlertDialog(
           backgroundColor: PaletteColor.primarybg,
@@ -173,6 +181,174 @@ class DialogEditProfile extends StatelessWidget {
                       SizedBox(
                         height: SpacingDimens.spacing12,
                       ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Pekerjaan",
+                                  style: TypographyStyle.mini.merge(
+                                    TextStyle(
+                                      color: PaletteColor.grey60,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: _pekerjaanController,
+                                  cursorColor: PaletteColor.primary,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      left: SpacingDimens.spacing16,
+                                      top: SpacingDimens.spacing8,
+                                      bottom: SpacingDimens.spacing8,
+                                    ),
+                                    hintText: "Pekerjaan",
+                                    hintStyle: TypographyStyle.paragraph.merge(
+                                      TextStyle(
+                                        color: PaletteColor.grey60,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: PaletteColor.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: SpacingDimens.spacing8,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Pendidikan",
+                                  style: TypographyStyle.mini.merge(
+                                    TextStyle(
+                                      color: PaletteColor.grey60,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: _pendidikanController,
+                                  cursorColor: PaletteColor.primary,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      left: SpacingDimens.spacing16,
+                                      top: SpacingDimens.spacing8,
+                                      bottom: SpacingDimens.spacing8,
+                                    ),
+                                    hintText: "Pendidikan",
+                                    hintStyle: TypographyStyle.paragraph.merge(
+                                      TextStyle(
+                                        color: PaletteColor.grey60,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: PaletteColor.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: SpacingDimens.spacing12,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Agama",
+                                  style: TypographyStyle.mini.merge(
+                                    TextStyle(
+                                      color: PaletteColor.grey60,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: _agamaController,
+                                  cursorColor: PaletteColor.primary,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      left: SpacingDimens.spacing16,
+                                      top: SpacingDimens.spacing8,
+                                      bottom: SpacingDimens.spacing8,
+                                    ),
+                                    hintText: "Agama",
+                                    hintStyle: TypographyStyle.paragraph.merge(
+                                      TextStyle(
+                                        color: PaletteColor.grey60,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: PaletteColor.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: SpacingDimens.spacing8,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Suku",
+                                  style: TypographyStyle.mini.merge(
+                                    TextStyle(
+                                      color: PaletteColor.grey60,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: _sukuController,
+                                  cursorColor: PaletteColor.primary,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      left: SpacingDimens.spacing16,
+                                      top: SpacingDimens.spacing8,
+                                      bottom: SpacingDimens.spacing8,
+                                    ),
+                                    hintText: "Suku",
+                                    hintStyle: TypographyStyle.paragraph.merge(
+                                      TextStyle(
+                                        color: PaletteColor.grey60,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: PaletteColor.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: SpacingDimens.spacing12,
+                      ),
                       Text(
                         "Tempat Tanggal Lahir",
                         style: TypographyStyle.mini.merge(
@@ -272,8 +448,17 @@ class DialogEditProfile extends StatelessWidget {
     final updateUser = Provider.of<UserProvider>(ctx, listen: false);
 
     updateUser
-        .updateUser(idUser, _namaController.text, _tinggiController.text,
-            _beratController.text, _ttlController.text, _alamatController.text)
+        .updateUser(
+            idUser,
+            _namaController.text,
+            _tinggiController.text,
+            _beratController.text,
+            _ttlController.text,
+            _alamatController.text,
+            _pekerjaanController.text,
+            _pendidikanController.text,
+            _agamaController.text,
+            _sukuController.text)
         .then((value) {
       if (value == 200) {
         Navigator.of(ctx).pushReplacement(

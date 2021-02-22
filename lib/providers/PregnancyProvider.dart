@@ -34,12 +34,8 @@ class PregnancyProvider extends ChangeNotifier {
     String lila,
     String fundus,
     String janin,
-    String imunisasi,
     String tablet,
     String lab,
-    String analisa,
-    String tatalaksana,
-    String konseling,
   }) async {
     String url = GlobalEndpoint.PREGNANCY_URL + '/store/' + id.toString();
     try {
@@ -52,14 +48,11 @@ class PregnancyProvider extends ChangeNotifier {
         'lila': lila,
         'fundus': fundus,
         'janin': janin,
-        'imunisasi': imunisasi,
         'tablet': tablet,
         'lab': lab,
-        'analisa': analisa,
-        'tatalaksana': tatalaksana,
-        'konseling': konseling,
       });
 
+      print(response.body);
       if (response.statusCode == 200) {
         return 200;
       } else {

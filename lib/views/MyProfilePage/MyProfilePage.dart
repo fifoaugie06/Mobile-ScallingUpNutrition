@@ -24,7 +24,7 @@ class MyProfilePage extends StatelessWidget {
             color: PaletteColor.primarybg,
           ),
         ),
-        actions:[
+        actions: [
           IconButton(
             icon: Icon(
               Icons.edit,
@@ -104,11 +104,39 @@ class MyProfilePage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        Row(
+                          children: [
+                            contentProfile(
+                              "Pekerjaan",
+                              user.pekerjaan ?? '-',
+                            ),
+                            SizedBox(
+                              width: SpacingDimens.spacing32,
+                            ),
+                            contentProfile(
+                              "Pendidikan",
+                              user.pendidikan ?? '-',
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            contentProfile(
+                              "Agama",
+                              user.agama ?? '-',
+                            ),
+                            SizedBox(
+                              width: SpacingDimens.spacing32,
+                            ),
+                            contentProfile(
+                              "Suku",
+                              user.suku ?? '-',
+                            ),
+                          ],
+                        ),
                         contentProfile(
                           "Tempat Tanggal Lahir",
-                          user.ttl == null
-                              ? "-"
-                              : user.ttl.toString(),
+                          user.ttl == null ? "-" : user.ttl.toString(),
                         ),
                         contentProfile(
                           "Alamat Email",

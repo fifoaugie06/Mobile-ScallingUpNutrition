@@ -24,8 +24,17 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  Future<int> updateUser(int id, String fullname, String tb, String bb,
-      String ttl, String address) async {
+  Future<int> updateUser(
+      int id,
+      String fullname,
+      String tb,
+      String bb,
+      String ttl,
+      String address,
+      String pekerjaan,
+      String pendidikan,
+      String agama,
+      String suku) async {
     final url = GlobalEndpoint.USERS_URL + "/update/" + id.toString();
     try {
       final response = await http.post(url, body: {
@@ -34,6 +43,10 @@ class UserProvider extends ChangeNotifier {
         'bb': bb,
         'ttl': ttl,
         'address': address,
+        'pekerjaan': pekerjaan,
+        'pendidikan': pendidikan,
+        'agama': agama,
+        'suku': suku,
       });
 
       if (response.statusCode == 200) {

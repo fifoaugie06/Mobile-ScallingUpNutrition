@@ -8,11 +8,22 @@ import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 import 'package:scallingupnutrition/views/CekKehamilanPage/CekKehamilanPage.dart';
 import 'package:toast/toast.dart';
 
-class CekKehamilanTambahPage extends StatelessWidget {
+class CekKehamilanTambahPage extends StatefulWidget {
   final int idUser;
   final BuildContext ctx;
 
   CekKehamilanTambahPage({@required this.idUser, @required this.ctx});
+
+  @override
+  _CekKehamilanTambahPageState createState() =>
+      _CekKehamilanTambahPageState(ctx: ctx, idUser: idUser);
+}
+
+class _CekKehamilanTambahPageState extends State<CekKehamilanTambahPage> {
+  final int idUser;
+  final BuildContext ctx;
+
+  _CekKehamilanTambahPageState({@required this.idUser, @required this.ctx});
 
   final _namaController = new TextEditingController();
   final _keluhanController = new TextEditingController();
@@ -22,12 +33,64 @@ class CekKehamilanTambahPage extends StatelessWidget {
   final _lilaController = new TextEditingController();
   final _fundusController = new TextEditingController();
   final _janinController = new TextEditingController();
-  final _imunisasiController = new TextEditingController();
   final _darahController = new TextEditingController();
   final _labController = new TextEditingController();
-  final _analisaController = new TextEditingController();
-  final _laksanaController = new TextEditingController();
-  final _konselingController = new TextEditingController();
+  int _radioValue1 = -1;
+  int _radioValue2 = -1;
+  int _radioValue3 = -1;
+  int _radioValue4 = -1;
+  int _radioValue5 = -1;
+  int _radioValue6 = -1;
+  int _radioValue7 = -1;
+  int _radioValue8 = -1;
+
+  void _handleRadioValueChange1(int value) {
+    setState(() {
+      _radioValue1 = value;
+    });
+  }
+
+  void _handleRadioValueChange2(int value) {
+    setState(() {
+      _radioValue2 = value;
+    });
+  }
+
+  void _handleRadioValueChange3(int value) {
+    setState(() {
+      _radioValue3 = value;
+    });
+  }
+
+  void _handleRadioValueChange4(int value) {
+    setState(() {
+      _radioValue4 = value;
+    });
+  }
+
+  void _handleRadioValueChange5(int value) {
+    setState(() {
+      _radioValue5 = value;
+    });
+  }
+
+  void _handleRadioValueChange6(int value) {
+    setState(() {
+      _radioValue6 = value;
+    });
+  }
+
+  void _handleRadioValueChange7(int value) {
+    setState(() {
+      _radioValue7 = value;
+    });
+  }
+
+  void _handleRadioValueChange8(int value) {
+    setState(() {
+      _radioValue8 = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +179,6 @@ class CekKehamilanTambahPage extends StatelessWidget {
             SizedBox(
               height: SpacingDimens.spacing16,
             ),
-            contentForms("Imunisasi", "Masukkan Jenis Imunisasi",
-                _imunisasiController, false),
             SizedBox(
               height: SpacingDimens.spacing16,
             ),
@@ -131,18 +192,36 @@ class CekKehamilanTambahPage extends StatelessWidget {
             SizedBox(
               height: SpacingDimens.spacing16,
             ),
-            contentForms(
-                "Analisa", "Masukkan Analisa", _analisaController, false),
             SizedBox(
               height: SpacingDimens.spacing16,
             ),
-            contentForms("Tata Laksana", "Masukkan Tata Laksana",
-                _laksanaController, false),
             SizedBox(
               height: SpacingDimens.spacing16,
             ),
-            contentForms(
-                "Konseling", "Masukkan Konseling", _konselingController, false),
+            contentQuestion(
+              'Apakah Ibu sudah pernah memeriksa kehamilan ke Bidan atau Puskesmas?',
+            ),
+            contentQuestion2(
+              'Apakah Ibu sudah melakukan pemeriksaan darah laboratorium?',
+            ),
+            contentQuestion3(
+              'Apakah Ibu sudah mengkonsumsi Tablet tambah darah dan asam folat?',
+            ),
+            contentQuestion4(
+              'Apakah Ibu ada mengkonsumsi makanan bergizi?',
+            ),
+            contentQuestion5(
+              'Apakah Ibu merokok atau terpapar asap rokok?',
+            ),
+            contentQuestion6(
+              'Apakah Ibu sudah pernah mengikuti kelas ibu hamil di wilayah tempat tinggal?',
+            ),
+            contentQuestion7(
+              'Apakah Ibu sudah memiliki JKN/BPJS?',
+            ),
+            contentQuestion8(
+              'Rencana tempat Melahirkan?',
+            ),
             SizedBox(
               height: SpacingDimens.spacing32,
             ),
@@ -159,12 +238,8 @@ class CekKehamilanTambahPage extends StatelessWidget {
                     _lilaController.text == "" ||
                     _fundusController.text == "" ||
                     _janinController.text == "" ||
-                    _imunisasiController.text == "" ||
                     _darahController.text == "" ||
-                    _labController.text == "" ||
-                    _analisaController.text == "" ||
-                    _laksanaController.text == "" ||
-                    _konselingController.text == "") {
+                    _labController.text == "") {
                   Toast.show("Pastikan telah terisi semuanya", context,
                       duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
                 } else {
@@ -242,12 +317,8 @@ class CekKehamilanTambahPage extends StatelessWidget {
       lila: _lilaController.text,
       fundus: _fundusController.text,
       janin: _janinController.text,
-      imunisasi: _imunisasiController.text,
       tablet: _darahController.text,
       lab: _labController.text,
-      analisa: _analisaController.text,
-      tatalaksana: _laksanaController.text,
-      konseling: _konselingController.text,
     )
         .then((value) {
       if (value == 200) {
@@ -261,5 +332,379 @@ class CekKehamilanTambahPage extends StatelessWidget {
         );
       }
     });
+  }
+
+  contentQuestion(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue1,
+              onChanged: _handleRadioValueChange1,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue1,
+              onChanged: _handleRadioValueChange1,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion2(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue2,
+              onChanged: _handleRadioValueChange2,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue2,
+              onChanged: _handleRadioValueChange2,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion3(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue3,
+              onChanged: _handleRadioValueChange3,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue3,
+              onChanged: _handleRadioValueChange3,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion4(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue4,
+              onChanged: _handleRadioValueChange4,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue4,
+              onChanged: _handleRadioValueChange4,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion5(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue5,
+              onChanged: _handleRadioValueChange5,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue5,
+              onChanged: _handleRadioValueChange5,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion6(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue6,
+              onChanged: _handleRadioValueChange6,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue6,
+              onChanged: _handleRadioValueChange6,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion7(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue7,
+              onChanged: _handleRadioValueChange7,
+            ),
+            Text(
+              'Sudah',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue7,
+              onChanged: _handleRadioValueChange7,
+            ),
+            Text(
+              'Belum',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
+  }
+  contentQuestion8(String question) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          question,
+          style: TypographyStyle.paragraph,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Radio(
+              value: 0,
+              groupValue: _radioValue8,
+              onChanged: _handleRadioValueChange8,
+            ),
+            Text(
+              'RS',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 1,
+              groupValue: _radioValue8,
+              onChanged: _handleRadioValueChange8,
+            ),
+            Text(
+              'Bidan',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+            Radio(
+              value: 2,
+              groupValue: _radioValue8,
+              onChanged: _handleRadioValueChange8,
+            ),
+            Text(
+              'Puskesmas',
+              style: TypographyStyle.subtitle2.merge(
+                TextStyle(
+                  color: PaletteColor.grey60,
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: SpacingDimens.spacing16,
+        ),
+      ],
+    );
   }
 }

@@ -4,7 +4,7 @@ import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 
 class CekKehamilanTile extends StatelessWidget {
-  String title, description;
+  final String title, description;
 
   CekKehamilanTile({@required this.title, @required this.description});
 
