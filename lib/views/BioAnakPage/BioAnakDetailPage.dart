@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scallingupnutrition/component/Indicator/IndicatorLoad.dart';
 import 'package:scallingupnutrition/model/Children.dart';
-import 'package:scallingupnutrition/providers/ChildrenProvider.dart';
 import 'package:scallingupnutrition/providers/ImmunizationProvider.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
-import 'package:scallingupnutrition/views/BioAnakPage/component/BioAnakTile.dart';
-import 'package:scallingupnutrition/views/BioAnakPage/component/DialogTambahAnak.dart';
+import 'package:scallingupnutrition/views/BioAnakPage/component/DialogTambahImunisasi.dart';
 import 'package:scallingupnutrition/views/BioAnakPage/component/ImmunizationTile.dart';
 
 class BioAnakDetailPage extends StatelessWidget {
   final Datum data;
+  final idUser;
 
-  BioAnakDetailPage({@required this.data});
+  BioAnakDetailPage({@required this.data, @required this.idUser});
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +97,39 @@ class BioAnakDetailPage extends StatelessWidget {
                         itemCount:
                             dataImmunization.responseImmunization.data.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(
-                              top: SpacingDimens.spacing12,
-                            ),
-                            child: ImmunizationTile(
-                              title: "xx",
-                              description: "yy",
+                          return GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) {
+                                  return DialogTambahImunisasi(
+                                    ctx: context,
+                                    idUser: idUser,
+                                    idImunisasi: dataImmunization
+                                        .responseImmunization.data[index].id,
+                                    datum:data,
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                top: SpacingDimens.spacing12,
+                              ),
+                              child: ImmunizationTile(
+                                title: dataImmunization
+                                    .responseImmunization.data[index].title,
+                                description: dataImmunization
+                                    .responseImmunization
+                                    .data[index]
+                                    .description,
+                                tanggal: dataImmunization.responseImmunization
+                                            .data[index].userImmunization ==
+                                        null
+                                    ? "Belum diset"
+                                    : dataImmunization.responseImmunization
+                                        .data[index].userImmunization.tanggal,
+                              ),
                             ),
                           );
                         },

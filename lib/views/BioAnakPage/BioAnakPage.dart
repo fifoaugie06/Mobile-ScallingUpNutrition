@@ -82,6 +82,7 @@ class BioAnakPage extends StatelessWidget {
                             routeTransition(
                               BioAnakDetailPage(
                                 data: dataChildren.responseChildren.data[index],
+                                idUser: idUser,
                               ),
                             ),
                           );

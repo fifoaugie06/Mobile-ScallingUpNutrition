@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:scallingupnutrition/model/Children.dart';
 import 'package:scallingupnutrition/theme/PaletteColor.dart';
 import 'package:scallingupnutrition/theme/SpacingDimens.dart';
 import 'package:scallingupnutrition/theme/TypographyStyle.dart';
 
 class ImmunizationTile extends StatelessWidget {
-  String title, description;
+  String title, description, tanggal;
 
-  ImmunizationTile({@required this.title, @required this.description});
+  ImmunizationTile({@required this.title, @required this.description, @required this.tanggal});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,17 @@ class ImmunizationTile extends StatelessWidget {
             Text(
               title,
               style: TypographyStyle.subtitle1,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: SpacingDimens.spacing4),
+              child: Text(
+                'Jadwal : ' + tanggal,
+                style: TypographyStyle.caption1.merge(
+                  TextStyle(
+                    color: PaletteColor.grey60,
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: SpacingDimens.spacing4),
